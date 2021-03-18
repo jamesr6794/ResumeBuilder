@@ -12,19 +12,19 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3003;
 // cors configurations
-const whitelist = ['http://localhost:3000', 'http://localhost:3001']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.includes(origin)) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+const whitelist = ['http://localhost:3000', 'http://localhost:3003', 'https://resumebuilderapi.herokuapp.com/', 'https://resumebuilder-frontend.herokuapp.com/']
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.includes(origin)) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
 
 //// MIDDLEWARE ////
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.urlencoded({ extended: true })) 
 app.use(express.json());
 app.use(
