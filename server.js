@@ -2,8 +2,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
-const bodyParser = require('body-parser')
-const passport = require('passport')
+// const bodyParser = require('body-parser')
+// const passport = require('passport')
+const session = require('express-session')
+require('dotenv').config();
+
 
 //// DEPENDENCIES CONFIGURATIONS ////
 const app = express();
@@ -22,18 +25,19 @@ const corsOptions = {
 
 //// MIDDLEWARE ////
 app.use(cors(corsOptions))
+app.use(express.urlencoded({ extended: true })) 
 app.use(express.json());
 app.use(
-  bodyParser.urlencoded({
-    extended: false
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
   })
-);
-app.use(bodyParser.json());
-app.use(passport.initialize())
+)
 
 //// DATABASE ////
 // config
-const db = require("./config/keys").mongoURI;
+// const db = require("./config/keys").mongoURI;
 // errors
 mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not running?'));
 mongoose.connection.on('disconnected', () => console.log ('mongo is disconnected'));
@@ -48,11 +52,14 @@ mongoose.connection.once('open', () => {
 // })
 
 //// CONTROLLERS ////
-const resumesController = require('./controllers/resume.js')
+const resumesController = require('./controllers/resume')
 app.use('/resumes', resumesController)
 
-const usersController = require('./controllers/users_controller')
+const usersController = require('./controllers/users')
 app.use('/users', usersController )
+
+const sessionsController = require('./controllers/sessions')
+app.use('/sessions', sessionsController )
 
 //// LISTENER ////
 app.listen(PORT, ()=> {
