@@ -32,6 +32,18 @@ router.post('/', (req, res) => {
     });
 });
 
+//read
+router.get('/:id', (req, res) => {
+
+    User.findById(req.params.id, (error, foundUser) => {
+        if (error) {
+            res.status(400).json({ error: error.message })
+        }
+        console.log(foundUser)
+        res.status(200).json(foundUser)
+    });
+})
+
 //update
 router.put('/:id', (req, res) => {
     
