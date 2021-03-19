@@ -11,7 +11,7 @@ require('dotenv').config();
 //// DEPENDENCIES CONFIGURATIONS ////
 const app = express();
 const PORT = process.env.PORT || 3003;
-// const mongodbURI = process.env.MONGODBURI
+const mongodbURI = process.env.MONGODBURI
 
 // cors configurations
 const whitelist = ['http://localhost:3000', 'http://localhost:3003', 'https://resumebuilderapi.herokuapp.com/', 'https://resumebuilder-frontend.herokuapp.com/']
@@ -44,7 +44,7 @@ app.use(
 mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not running?'));
 mongoose.connection.on('disconnected', () => console.log ('mongo is disconnected'));
 //conections
-mongoose.connect('mongodb://localhost:27017/resumes', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('connected to mongoose');
 });
