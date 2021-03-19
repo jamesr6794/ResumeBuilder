@@ -6,12 +6,13 @@ const userSchema = mongoose.Schema({
     username: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     firstName: { type: String, default: '' },
-    lastName: { type: String, default: ''},
+    lastName: { type: String, default: '' },
+    city: { type: String, default: '' },
+    address: { type: String, default: '' },
+    state: { type: String, default: '' },
     masterResume: {
         title: { type: String, default: '' },
-        city: { type: String, default: '' },
-        address: { type: String, default: '' },
-        state: { type: String, default: '' },
+       
         summery: { type: String, default: '' },
         title: { type: String, default: '' },
         experience: [{
