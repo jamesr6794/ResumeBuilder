@@ -11,8 +11,10 @@ require('dotenv').config();
 //// DEPENDENCIES CONFIGURATIONS ////
 const app = express();
 const PORT = process.env.PORT || 3003;
+// const mongodbURI = process.env.MONGODBURI
+
 // cors configurations
-const whitelist = ['http://localhost:3000', 'http://localhost:3001']
+const whitelist = ['http://localhost:3000', 'http://localhost:3003', 'https://resumebuilderapi.herokuapp.com/', 'https://resumebuilder-frontend.herokuapp.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.includes(origin)) {
@@ -24,7 +26,7 @@ const corsOptions = {
 }
 
 //// MIDDLEWARE ////
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.urlencoded({ extended: true })) 
 app.use(express.json());
 app.use(
