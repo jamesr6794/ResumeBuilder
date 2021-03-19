@@ -10,6 +10,7 @@
 <ul>
 <li>MVC structure with sessions</li>
 <li>Signup/Login functionality</li>
+</ul>
 
 ### Tools and Languages Used
 <ul>
